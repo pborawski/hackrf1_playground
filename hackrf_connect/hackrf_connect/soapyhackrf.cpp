@@ -39,10 +39,33 @@ void SoapyHackRF::listInfo(){
         return;
     }
 
+    std::cout << endl << "Antennas: |";
     vector<string> antennas = hackrf->listAntennas(SOAPY_SDR_RX,0);
     for (auto const& antenna : antennas){
-        std::cout << antenna << endl;
+        std::cout << antenna << "|";
     }
+
+    std::cout <<endl << "Gains: |";
+    vector<string> gains = hackrf->listGains(SOAPY_SDR_RX,0);
+    for (auto const& gain : gains){
+        std::cout << gain << "|";
+    }
+
+    std::cout <<endl << "Bandwidths (Mhz): |";
+    vector<double> bandwidths = hackrf->listBandwidths(SOAPY_SDR_RX,0);
+    for (auto const& bandwidth : bandwidths){
+        std::cout << bandwidth/1.0e6 << "|";
+    }
+
+    std::cout <<endl << "Frequencies: |";
+    vector<string> frequencies = hackrf->listFrequencies(SOAPY_SDR_RX,0);
+    for (auto const& frequency : frequencies){
+        std::cout << frequency << "|";
+    }
+
+
+
+    std::cout <<endl;
 }
 
 void SoapyHackRF::disconnect(){
